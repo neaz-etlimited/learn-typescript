@@ -1,29 +1,23 @@
-class Account {
-  readonly id: number;
-  owner: string;
-  private _balance: number;
-  nickname?:string;
-
-  constructor(id: number, owner: string, balance: number) {
-    this.id = id;
-    this.owner = owner;
-    this._balance = balance;
+class Person {
+  constructor(public firstName: string, public lastName: string) {}
+  get fullName() {
+    return this.firstName + "" + this.lastName;
   }
 
-  deposit(amount: number): void {
-    if (amount <= 0) {
-      throw new Error("Invalid amount");
-    }
-    this._balance += amount;
-  }
-
-  private _calculateTax(){
-
-  }
-
-  getBalance(): number {
-    return this._balance;
+  walk(){
+    console.log('Walking')
   }
 }
 
-let account = new Account(1, 'Neaz',0);
+
+class Student extends Person {
+    constructor(public studentId: number, firstName: string, lastName: string){
+        super(firstName, lastName)
+    }
+
+    takeTest(){
+        console.log("Taking")
+    }
+}
+
+let student = new Student (1, 'John', 'john@gmail.com');
