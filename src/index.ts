@@ -1,29 +1,90 @@
-// abstract class Calendar {
-//   constructor(public name: string) {}
+// class KeyValuePair<K, V> {
+//     constructor(public key: K, public value: V){
 
-//   abstract addEvent(): void;
-//   abstract removeEvent(): void;
+//     }
 // }
 
-interface ICalendar {
-    name: string;
-    addEvent(): void;
-    removeEvent(): void;
+// let pair = new KeyValuePair<string, string>('1', 'a');
+
+// class ArrayUtils {
+//   static wrapInArray<T>(value: T) {
+//     return [value];
+//   }
+// }
+
+// let utils = new ArrayUtils();
+
+// let numbers = ArrayUtils.wrapInArray(1);
+
+// interface Result<T> {
+//   data: T | null;
+//   error: string | null;
+// }
+
+// function fetch<T>(url: string): Result<T> {
+//   return { data: null, error: null };
+// }
+
+// interface User {
+//   username: string;
+// }
+
+// interface Product {
+//   title: string;
+// }
+
+// let result = fetch<User>("url");
+
+// interface Product{
+//     name: string;
+//     price: number;
+// }
+
+// class Store<T>{
+//     protected _objects: T[] = [];
+
+//     add(obj: T): void {
+//       this._objects.push(obj);
+//     }
+// }
+
+
+// class CompressibleStore<T> extends Store<T> {
+//     compress(){}
+// }
+
+// // Restricting the generic type parameter
+// class SearchableStore<T extends { name : string}> extends Store<T> {
+//     find(name: string): T | undefined {
+//         return this._objects.find((obj)=> obj.name === name)
+//     }
+// }
+
+// class ProductStore extends Store<Product> {
+//         filterByCategory(category)
+// }
+
+
+Type mapping
+
+interface Product {
+    name : string;
+    price: number;
 }
 
-interface CloudCalendar extends ICalendar {
-    sync(): void;
+type ReadOnly<T> = {
+   readonly [K in keyof T] : T[K]
 }
 
-class GoogleCalander implements ICalendar {
+type Optional<T> = {
+    [K in keyof T]?: T[K]
+}
+    
+type Nullable<T> = {
+    [K in keyof T]: T[K] | null
+}
 
-    constructor(public name: string){}
-    
-    addEvent(): void {
-        throw new Error("Method not implemented.");
-    }
-    removeEvent(): void {
-        throw new Error("Method not implemented.");
-    }
-    
+let product: ReadOnly<Product> = {
+    name : 'a',
+    price : 1
 }

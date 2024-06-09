@@ -1,18 +1,7 @@
-"use strict";
-class Account {
-    constructor(id, owner, balance) {
-        this.id = id;
-        this.owner = owner;
-        this.balance = balance;
-    }
-    deposit(amount) {
-        if (amount <= 0) {
-            throw new Error("Invalid amount");
-        }
-        this.balance += amount;
-    }
+function factorial_recurse(num) {
+  if (num === 0 || num === 1) {
+    return 1;
+  } else return num * factorial_recurse(num - 1);
 }
-let account = new Account(1, 'Neaz', 0);
-account.deposit(100);
-console.log(account.balance);
-//# sourceMappingURL=index.js.map
+
+console.log(factorial_recurse(5));
