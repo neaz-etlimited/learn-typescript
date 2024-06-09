@@ -1,24 +1,34 @@
-// Accessor decorator
-function Capitalize(
-  target: any,
-  methodName: string,
-  descriptor: PropertyDescriptor
-) {
-  const original = descriptor.get;
-  descriptor.get = function () {
-    const result = original?.call(this);
-    return typeof result === "string" ? result.toUpperCase() : result;
+// Property Decorator
+
+function MinLength(length: number) {
+  return (target: any, propertyName: string) => {
+    let value: string;
+
+    const descriptor: PropertyDescriptor = {
+      get() {
+        return value;
+      },
+      set(newValue: string) {
+        if (newValue.length < length)
+          throw new Error(
+            `Property should be at least ${length} characters long.`
+          );
+        value = newValue;
+      },
+    };
+
+    Object.defineProperty(target, propertyName, descriptor);
   };
 }
 
-class Person {
-  constructor(public firstName: string, public lastName: string) {}
+class User {
+  @MinLength(4)
+  password: string;
 
-  @Capitalize
-  get fullName() {
-    return null;
+  constructor(password: string) {
+    this.password = password;
   }
 }
 
-let person = new Person("mosh", "hamedani");
-console.log(person.fullName); // Output: MOSH HAMEDANI
+let user = new User("123");
+console.log(user.password);
